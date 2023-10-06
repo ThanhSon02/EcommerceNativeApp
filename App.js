@@ -1,10 +1,13 @@
-import { NavigationContainer } from "@react-navigation/native";
-import Tabbar from "./components/Tabbar";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import StackNavigator from "./navigation/StackNavigation";
 
 export default function App() {
     return (
-        <NavigationContainer>
-            <Tabbar />
-        </NavigationContainer>
+        <>
+            <Provider store={store}>
+                <StackNavigator/>
+            </Provider>
+        </>
     );
 }

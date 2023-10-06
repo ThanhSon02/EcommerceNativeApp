@@ -1,10 +1,12 @@
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import { View, Text, Image, StyleSheet,  TouchableOpacity } from "react-native";
 import AntdIcon from "@expo/vector-icons/AntDesign";
-import React from "react";
+import React, { useState } from "react";
 
-const screenWidth = Dimensions.get("window").width;
-const cardWidth = (screenWidth - 50) / 2;
 const CardProduct = () => {
+    const [favotite, setFavorite] = useState(false)
+    const handleSetFavorite = () => {
+        setFavorite(!favotite)
+    }
     return (
         <View style={styles.container}>
             <View
@@ -13,20 +15,27 @@ const CardProduct = () => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: "red",
-                    width: 160,
+                    backgroundColor: "#f5f5f5",
+                    width: "100%",
                     height: 170,
                     borderRadius: 24,
+                    marginBottom: 8
                 }}>
-                <View style={styles.icon}>
-                    <AntdIcon name="heart" size={20} />
-                </View>
+                <TouchableOpacity onPress={handleSetFavorite} style={{position: "absolute", right: 20, top: 10, zIndex: 10}}>
+                    <View style={styles.icon}>
+                        <AntdIcon name="heart" size={16} color={favotite ? "red" : "black"}/>
+                    </View>
+                </TouchableOpacity>
                 <Image
                     source={require("../assets/sonyHeadphone.png")}
                     style={styles.image}
                 />
             </View>
-            <Text>CardProduct</Text>
+            <View style={{marginLeft: 10}}>
+                <Text style={{fontSize: 14, fontWeight: "bold"}}>$349.99</Text>
+                <Text style={{fontSize: 14, fontWeight: 500}}>SONY Premium Wireless Headphones</Text>
+                <Text style={{fontSize: 10, color: "#868D94"}}>Model: WH-1000XM4, Black</Text>
+            </View>
         </View>
     );
 };
@@ -35,12 +44,10 @@ export default CardProduct;
 
 const styles = StyleSheet.create({
     container: {
-        width: cardWidth,
+        width: "48%",
+        marginBottom: 12
     },
     icon: {
-        position: "absolute",
-        right: 20,
-        top: 10,
         backgroundColor: "#fff",
         padding: 5,
         borderRadius: 50,

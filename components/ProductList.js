@@ -8,10 +8,9 @@ const ProductList = ({ title }) => {
     return (
         <View>
             <Text style={styles.title}>{title}</Text>
-            <FlatList
-                numColumns={2}
-                data={arr}
-                renderItem={() => <CardProduct />}></FlatList>
+            <View style={{display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: 'flex-start', gap: 10}}>
+                {arr.map((item, index) => <CardProduct key={index}/>)}
+            </View>
         </View>
     );
 };
