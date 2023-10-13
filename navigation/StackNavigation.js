@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Tabbar from "../components/Tabbar";
+import SearchResult from "../screens/SearchResult";
 
 
 const StackNavigator = () => {
@@ -26,6 +27,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="Main"
           component={Tabbar}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SearchResult"
+          component={SearchResult}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -89,7 +89,8 @@ function Tabbar() {
                                 color={"#868D94"}
                             />
                         ),
-                }}
+                        headerShown: false
+                    }}
             />
             <Tab.Screen
                 name="Favotite"
