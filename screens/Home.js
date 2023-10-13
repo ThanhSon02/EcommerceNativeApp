@@ -8,7 +8,9 @@ function Home() {
         <SafeAreaView style={styles.container}>
             <Text style={styles.header_text}>Hello Michael</Text>
             <Navbar />
-            <ScrollView showsVerticalScrollIndicator={false} style={{marginBottom: 100}}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ marginBottom: 100 }}>
                 <CarouselCPN />
                 <ProductList title={"Recommended for you"} />
             </ScrollView>
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingLeft: 20,
         paddingRight: 20,
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
     },
     header_text: {
         fontSize: 32,
