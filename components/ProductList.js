@@ -6,10 +6,10 @@ const arr = [1, 2, 3, 4, 5, 6, 7];
 
 const ProductList = ({ title }) => {
     return (
-        <View>
+        <View style={{width: "100%"}}>
             <Text style={styles.title}>{title}</Text>
-            <View style={{display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: 'flex-start', gap: 10}}>
-                {arr.map((item, index) => <CardProduct key={index}/>)}
+            <View style={{display: "flex", flexDirection: "row", flexWrap: "wrap", alignItems: 'flex-start', gap: 30, width: "100%"}}>
+                {arr.map((item, index) => <CardProduct key={index} />)}
             </View>
         </View>
     );
@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: "bold",
+        marginBottom: 10
     },
 });

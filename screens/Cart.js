@@ -1,5 +1,9 @@
+import { Flex, ScrollView, Text, VStack } from "native-base";
+
 function Cart() {
-    return ( <></> );
+    return (
+        <></> 
+    );
 }
 
 export default Cart;

@@ -1,59 +1,91 @@
-import { View, Text, Image, StyleSheet,  TouchableOpacity } from "react-native";
+import { View,  TouchableOpacity } from "react-native";
 import AntdIcon from "@expo/vector-icons/AntDesign";
 import React, { useState } from "react";
+import { Text, Image, Pressable, VStack, Box } from "native-base";
+import { useNavigation } from "@react-navigation/native";
 
 const CardProduct = () => {
-    const [favotite, setFavorite] = useState(false)
-    const handleSetFavorite = () => {
-        setFavorite(!favotite)
-    }
-    return (
-        <View style={styles.container}>
-            <View
+    const navigation = useNavigation()
+  const [favotite, setFavorite] = useState(false);
+  const handleSetFavorite = () => {
+    setFavorite(!favotite);
+  };
+
+  const gotoDetail = () => {
+    navigation.replace("Detail");
+  };
+
+  return (
+    <Pressable onPress={gotoDetail} w={160}>
+      {({ isHovered, isPressed }) => {
+        return (
+          <VStack>
+            <Box
+              bgColor={"#F5F5F5"}
+              borderRadius={24}
+              position={"relative"}
+              bg={
+                isPressed
+                  ? "coolGray.200"
+                  : isHovered
+                  ? "coolGray.200"
+                  : "coolGray.100"
+              }
+              style={{
+                transform: [
+                  {
+                    scale: isPressed ? 0.96 : 1,
+                  },
+                ],
+              }}
+            >
+              <Image
+                w={160}
+                height={160}
+                source={require("../assets/sonyHeadphone.png")}
+                alt="product"
+              />
+              <TouchableOpacity
+                onPress={handleSetFavorite}
                 style={{
-                    position: "relative",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: "#f5f5f5",
-                    width: "100%",
-                    height: 170,
-                    borderRadius: 24,
-                    marginBottom: 8
-                }}>
-                <TouchableOpacity onPress={handleSetFavorite} style={{position: "absolute", right: 20, top: 10, zIndex: 10}}>
-                    <View style={styles.icon}>
-                        <AntdIcon name="heart" size={16} color={favotite ? "red" : "black"}/>
-                    </View>
-                </TouchableOpacity>
-                <Image
-                    source={require("../assets/sonyHeadphone.png")}
-                    style={styles.image}
-                />
-            </View>
-            <View style={{marginLeft: 10}}>
-                <Text style={{fontSize: 14, fontWeight: "bold"}}>$349.99</Text>
-                <Text style={{fontSize: 14, fontWeight: 500}}>SONY Premium Wireless Headphones</Text>
-                <Text style={{fontSize: 10, color: "#868D94"}}>Model: WH-1000XM4, Black</Text>
-            </View>
-        </View>
-    );
+                  position: "absolute",
+                  right: 10,
+                  top: 10,
+                  zIndex: 10,
+                }}
+              >
+                <View
+                  style={{
+                    backgroundColor: "#fff",
+                    borderRadius: 50,
+                    padding: 5,
+                  }}
+                >
+                  <AntdIcon
+                    name="heart"
+                    size={16}
+                    color={favotite ? "red" : "black"}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Box>
+            <VStack>
+              <Text fontSize={14} fontWeight={"bold"}>
+                $349.99
+              </Text>
+              <Text fontSize={14} fontWeight={"semibold"}>
+                SONY Premium Wireless Headphones
+              </Text>
+              <Text fontSize={10} color={"#868D94"}>
+                Model: WH-1000XM4, Black
+              </Text>
+            </VStack>
+          </VStack>
+        );
+      }}
+    </Pressable>
+  );
 };
 
 export default CardProduct;
 
-const styles = StyleSheet.create({
-    container: {
-        width: "48%",
-        marginBottom: 12
-    },
-    icon: {
-        backgroundColor: "#fff",
-        padding: 5,
-        borderRadius: 50,
-    },
-    image: {
-        width: 140,
-        height: 140,
-    },
-});

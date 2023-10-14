@@ -7,7 +7,6 @@ import {
     View,
 } from "react-native";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
     Box,
     Center,
@@ -20,7 +19,7 @@ import {
     Link,
 } from "native-base";
 
-const Register = () => {
+const Register = ({navigation}) => {
     const [formRegister, setFormRegister] = useState({});
 
     // const validateEmail = (text) => {
@@ -30,9 +29,8 @@ const Register = () => {
     //   }
     // }
 
-    const navigation = useNavigation();
     const navigationLogin = () => {
-        navigation.replace("Login");
+        navigation.navigate("Login");
     };
 
     const handleRegister = () => {

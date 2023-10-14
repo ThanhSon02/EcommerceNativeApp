@@ -6,6 +6,7 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Tabbar from "../components/Tabbar";
 import SearchResult from "../screens/SearchResult";
+import Detail from "../screens/Detail";
 
 
 const StackNavigator = () => {
@@ -32,6 +33,12 @@ const StackNavigator = () => {
         <Stack.Screen
           name="SearchResult"
           component={SearchResult}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="Detail"
+          component={Detail}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

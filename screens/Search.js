@@ -2,13 +2,11 @@ import {  StyleSheet } from 'react-native'
 import React from 'react'
 import AntdIcon from "@expo/vector-icons/AntDesign";
 import {ScrollView, VStack, HStack, Input, Icon, Center, Box, Pressable, Badge, Spacer, Text, Heading, Flex } from 'native-base'
-import { useNavigation } from '@react-navigation/native';
 
-function Search() {
-  const navigation = useNavigation()
+function Search({navigation}) {
 
   const getSearchResult = () => {
-    navigation.replace("SearchResult")
+    navigation.navigate("SearchResult")
   }
 
   return (

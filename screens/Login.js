@@ -1,13 +1,8 @@
 import {
-    Pressable,
     StyleSheet,
     Text,
-    TextInput,
-    TouchableOpacity,
-    View,
 } from "react-native";
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import {
     Box,
     Center,
@@ -16,18 +11,16 @@ import {
     Heading,
     Input,
     Link,
-    Stack,
     VStack,
     Button,
 } from "native-base";
 
-const Login = () => {
-    const navigation = useNavigation();
+const Login = ({navigation}) => {
     const handleLogin = () => {
-        navigation.replace("Main");
+        navigation.navigate("Main");
     };
     const registerNavigate = () => {
-        navigation.replace("Register");
+        navigation.navigate("Register");
     };
     return (
         <Center w="100%" h="100%">
