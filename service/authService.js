@@ -43,7 +43,7 @@ export const registerUser = createAsyncThunk(
 
 export const logout = createAsyncThunk(
     "auth/logout",
-    async ({ accessToken }) => {
+    async ({ accessToken, navigation }) => {
         try {
             await axiosInstance.post(
                 "/auth/logout",
@@ -54,6 +54,7 @@ export const logout = createAsyncThunk(
                     },
                 }
             );
+            navigation.navigate("Login");
         } catch (error) {
             console.log(error.response.data.message);
         }

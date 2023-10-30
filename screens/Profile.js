@@ -1,6 +1,15 @@
 import { Box, Flex, Pressable, ScrollView, Text, VStack } from "native-base";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../service/authService";
 
 function Profile({ navigation }) {
+    const dispatch = useDispatch();
+    const accessToken = useSelector((state) => state.auth.auth.accessToken);
+
+    const handleLogout = () => {
+        dispatch(logout({ accessToken, navigation }));
+    };
+
     return (
         <Flex
             width={"100%"}
@@ -71,7 +80,7 @@ function Profile({ navigation }) {
                         }}
                     </Pressable>
 
-                    <Pressable w="100%" mb={2}>
+                    <Pressable onPress={handleLogout} w="100%" mb={2}>
                         {({ isHovered, isPressed }) => {
                             return (
                                 <Box
