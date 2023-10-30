@@ -1,91 +1,90 @@
-import { View,  TouchableOpacity } from "react-native";
-import AntdIcon from "@expo/vector-icons/AntDesign";
-import React, { useState } from "react";
-import { Text, Image, Pressable, VStack, Box } from "native-base";
+import { useState } from "react";
+import { Text, Image, Pressable, VStack, Box, Flex } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
-const CardProduct = () => {
-    const navigation = useNavigation()
-  const [favotite, setFavorite] = useState(false);
-  const handleSetFavorite = () => {
-    setFavorite(!favotite);
-  };
-
-  const gotoDetail = () => {
-    navigation.replace("Detail");
-  };
-
-  return (
-    <Pressable onPress={gotoDetail} w={160}>
-      {({ isHovered, isPressed }) => {
-        return (
-          <VStack>
-            <Box
-              bgColor={"#F5F5F5"}
-              borderRadius={24}
-              position={"relative"}
-              bg={
-                isPressed
-                  ? "coolGray.200"
-                  : isHovered
-                  ? "coolGray.200"
-                  : "coolGray.100"
-              }
-              style={{
-                transform: [
-                  {
-                    scale: isPressed ? 0.96 : 1,
-                  },
-                ],
-              }}
-            >
-              <Image
-                w={160}
-                height={160}
-                source={require("../assets/sonyHeadphone.png")}
-                alt="product"
-              />
-              <TouchableOpacity
-                onPress={handleSetFavorite}
-                style={{
-                  position: "absolute",
-                  right: 10,
-                  top: 10,
-                  zIndex: 10,
-                }}
-              >
-                <View
-                  style={{
-                    backgroundColor: "#fff",
-                    borderRadius: 50,
-                    padding: 5,
-                  }}
-                >
-                  <AntdIcon
-                    name="heart"
-                    size={16}
-                    color={favotite ? "red" : "black"}
-                  />
-                </View>
-              </TouchableOpacity>
-            </Box>
-            <VStack>
-              <Text fontSize={14} fontWeight={"bold"}>
-                $349.99
-              </Text>
-              <Text fontSize={14} fontWeight={"semibold"}>
-                SONY Premium Wireless Headphones
-              </Text>
-              <Text fontSize={10} color={"#868D94"}>
-                Model: WH-1000XM4, Black
-              </Text>
-            </VStack>
-          </VStack>
-        );
-      }}
-    </Pressable>
-  );
+const CardProduct = ({ data }) => {
+    const navigation = useNavigation();
+    return (
+        <Pressable
+            bgColor={"#f5f5f5"}
+            p={4}
+            borderRadius={24}
+            onPress={() =>
+                navigation.navigate("Detail", {
+                    _id: data?._id,
+                    product_img: data?.product_img,
+                    product_name: data?.product_name,
+                    price: data?.price,
+                    category: data?.category,
+                    discount: data?.discount,
+                    description: data?.description,
+                    in_stock: data?.in_stock,
+                })
+            }
+            w={170}
+            h={300}>
+            {({ isHovered, isPressed }) => {
+                return (
+                    <Box>
+                        <Box
+                            position={"relative"}
+                            overflow={"hidden"}
+                            mb={2}
+                            bg={
+                                isPressed
+                                    ? "coolGray.200"
+                                    : isHovered
+                                    ? "coolGray.200"
+                                    : "coolGray.100"
+                            }
+                            style={{
+                                transform: [
+                                    {
+                                        scale: isPressed ? 0.96 : 1,
+                                    },
+                                ],
+                            }}>
+                            <Image
+                                w={160}
+                                height={160}
+                                source={{ uri: data.product_img }}
+                                alt="product"
+                            />
+                        </Box>
+                        <VStack>
+                            <Box display={"flex"} flexDirection={"row"} gap={3}>
+                                {data.discount ? (
+                                    <Text
+                                        fontSize={18}
+                                        fontWeight={"bold"}
+                                        color={"red.500"}>
+                                        $
+                                        {Math.ceil(
+                                            (1 - data.discount / 100) *
+                                                data.price
+                                        )}
+                                    </Text>
+                                ) : (
+                                    <></>
+                                )}
+                                <Text
+                                    fontSize={18}
+                                    fontWeight={"bold"}
+                                    textDecorationLine={
+                                        data.discount ? "line-through" : ""
+                                    }>
+                                    ${data.price}
+                                </Text>
+                            </Box>
+                            <Text fontSize={14} fontWeight={"semibold"}>
+                                {data.product_name}
+                            </Text>
+                        </VStack>
+                    </Box>
+                );
+            }}
+        </Pressable>
+    );
 };
 
 export default CardProduct;
-

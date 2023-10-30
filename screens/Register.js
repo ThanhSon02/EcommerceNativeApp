@@ -18,23 +18,24 @@ import {
     HStack,
     Link,
 } from "native-base";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../service/authService";
 
-const Register = ({navigation}) => {
-    const [formRegister, setFormRegister] = useState({});
-
-    // const validateEmail = (text) => {
-    //   let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/
-    //   if (reg.test(text) === false) {
-    //     console.log("Email is Not Correct");
-    //   }
-    // }
+const Register = ({ navigation }) => {
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [name, setName] = useState();
+    const [phone, setPhone] = useState();
+    const [address, setAddress] = useState();
 
     const navigationLogin = () => {
         navigation.navigate("Login");
     };
 
     const handleRegister = () => {
-        console.log(formRegister);
+        const registerInfo = { email, password, name, phone, address };
+        dispatch(registerUser({ registerInfo, navigation }));
     };
 
     return (
@@ -61,18 +62,47 @@ const Register = ({navigation}) => {
                 </Heading>
                 <VStack space={3} mt="5">
                     <FormControl>
+                        <FormControl.Label>Name</FormControl.Label>
+                        <Input
+                            value={name}
+                            onChangeText={(text) => setName(text)}
+                        />
+                    </FormControl>
+                    <FormControl>
                         <FormControl.Label>Email</FormControl.Label>
-                        <Input />
+                        <Input
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
+                        />
                     </FormControl>
                     <FormControl>
                         <FormControl.Label>Password</FormControl.Label>
-                        <Input type="password" />
+                        <Input
+                            type="password"
+                            value={password}
+                            onChangeText={(text) => setPassword(text)}
+                        />
                     </FormControl>
                     <FormControl>
-                        <FormControl.Label>Confirm Password</FormControl.Label>
-                        <Input type="password" />
+                        <FormControl.Label>Phone</FormControl.Label>
+                        <Input
+                            type="text"
+                            value={phone}
+                            onChangeText={(text) => setPhone(text)}
+                        />
                     </FormControl>
-                    <Button mt="2" colorScheme="indigo">
+                    <FormControl>
+                        <FormControl.Label>Address</FormControl.Label>
+                        <Input
+                            type="text"
+                            value={address}
+                            onChangeText={(text) => setAddress(text)}
+                        />
+                    </FormControl>
+                    <Button
+                        onPress={handleRegister}
+                        mt="2"
+                        colorScheme="indigo">
                         Sign up
                     </Button>
                     <HStack mt="6" justifyContent="center">

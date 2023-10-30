@@ -1,7 +1,4 @@
-import {
-    StyleSheet,
-    Text,
-} from "react-native";
+import { StyleSheet, Text } from "react-native";
 import React from "react";
 import {
     Box,
@@ -14,11 +11,22 @@ import {
     VStack,
     Button,
 } from "native-base";
+import { useDispatch } from "react-redux";
+import { login } from "../service/authService";
+import { useState } from "react";
+import axiosInstance from "../axios/axios";
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
+    const dispatch = useDispatch();
+
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+
     const handleLogin = () => {
-        navigation.navigate("Main");
+        const loginInfo = { email, password };
+        dispatch(login({ loginInfo, navigation }));
     };
+
     const registerNavigate = () => {
         navigation.navigate("Register");
     };
@@ -48,11 +56,18 @@ const Login = ({navigation}) => {
                 <VStack space={3} mt="5">
                     <FormControl isRequired>
                         <FormControl.Label>Email</FormControl.Label>
-                        <Input />
+                        <Input
+                            value={email}
+                            onChangeText={(text) => setEmail(text)}
+                        />
                     </FormControl>
                     <FormControl isRequired>
                         <FormControl.Label>Password</FormControl.Label>
-                        <Input type="password" />
+                        <Input
+                            type="password"
+                            value={password}
+                            onChangeText={(text) => setPassword(text)}
+                        />
                     </FormControl>
                     <Button onPress={handleLogin} mt="2" colorScheme="indigo">
                         Sign in
