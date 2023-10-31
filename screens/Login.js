@@ -14,7 +14,6 @@ import {
 import { useDispatch } from "react-redux";
 import { login } from "../service/authService";
 import { useState } from "react";
-import axiosInstance from "../axios/axios";
 
 const Login = ({ navigation }) => {
     const dispatch = useDispatch();

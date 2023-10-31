@@ -20,15 +20,15 @@ const category = [
     },
     {
         label: "Drones + Electrolics",
-        value: "Drones+Electrolics",
+        value: "DronesElectrolics",
     },
     {
         label: "Photo + Videos",
-        value: "Photo+Videos",
+        value: "PhotoVideos",
     },
     {
         label: "Gaming + VR",
-        value: "Gaming+VR",
+        value: "GamingVR",
     },
     {
         label: "Networking",
